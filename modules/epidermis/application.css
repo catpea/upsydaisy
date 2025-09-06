@@ -1,0 +1,124 @@
+/*
+
+  TODO
+  MORE TESTING WITH COLORS
+  @media only screen and (max-width: 600px) {
+    --grid-template-areas:
+      "brand profile"
+      "search alert   "
+      "menu  main"
+      "properties properties"
+      "foot  foot";
+    --grid-template-columns: 1fr;
+
+  }
+
+  @media only screen and (min-width: 600px) {
+    --grid-template-areas:
+      "brand search  profile"
+      "menu  alert   properties"
+      "menu  main    properties"
+      "foot  foot    foot";
+    --grid-template-columns: 18rem 1fr 18rem;
+
+
+  }
+
+      */
+
+web-application.sidebar-application {
+  box-sizing: border-box;
+
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "caption caption profile"
+    "brand   search  properties"
+    "menu    main    properties"
+    "foot    foot    alert";
+  grid-template-rows: auto;
+  grid-template-columns: 12rem 1fr 14rem;
+
+  > header {
+    grid-area: caption;
+  }
+  > figure {
+    grid-area: brand;
+  }
+  > search-form {
+    grid-area: search;
+  }
+  > user-info {
+    grid-area: profile;
+  }
+  > nav {
+    grid-area: menu;
+  }
+  > alert-region {
+    grid-area: alert;
+  }
+  > aside {
+    grid-area: properties;
+  }
+  > main {
+    grid-area: main;
+  }
+  > footer {
+    grid-area: foot;
+  }
+}
+
+web-application.sidebar-application.theme1 {
+
+  --padding: 1rem;
+  --border-radius: 8px;
+
+  padding: var(--padding);
+
+  background: var(--up2-background);
+  border-radius: var(--border-radius);
+
+  box-shadow: 2px 0 24px 0 rgba(0, 0, 0, 0.3);
+
+  > header {
+    background: var(--up2-caption);
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+  }
+
+  > figure {
+    background: var(--up2-caption);
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+  }
+
+  > search-form {
+    padding: var(--padding);
+  }
+
+  > user-info {
+    padding: var(--padding);
+  }
+
+  > nav {
+    padding: var(--padding);
+  }
+
+  > alert-region {
+    border-radius: var(--border-radius);
+    background: var(--up2-raised);
+    padding: var(--padding);
+  }
+
+  > aside {
+    padding: var(--padding);
+  }
+
+  > main {
+    padding: var(--padding);
+  }
+
+  > footer {
+    padding: var(--padding);
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "upsydaisy",
+  "description": "Gradient Smart Theme Builder",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "watch": "./watcher.js",
+    "demo": "http-server -c-1 -o .",
+    "modules": "rsync -avL --exclude='.*' --exclude='_unused' ./node_modules/* ./modules/",
+    "save": "npm run modules; git add .; git commit -m 'Updated Release'; npm version patch; npm publish; git push --follow-tags;"
+  },
+  "keywords": [
+    "rev",
+    "fp"
+  ],
+  "author": "@catpea",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/catpea/upsydaisy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catpea/upsydaisy/issues"
+  },
+  "homepage": "https://github.com/catpea/upsydaisy#readme",
+  "dependencies": {
+    "epidermis": "^1.0.1",
+    "blueberries": "^1.0.16"
+  },
+  "localDependencies": {
+    "../epidermis": "^1.0.1",
+    "../blueberries": "^1.0.16"
+  }
+}

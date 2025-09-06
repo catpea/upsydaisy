@@ -1,0 +1,675 @@
+/* ===================================================================
+   DEVELOPER CSS VARIABLES
+   Centralized control for all development tools
+   =================================================================== */
+
+:root {
+  /* ============================================
+     PLACEHOLDER SYSTEM
+     ============================================ */
+  --placeholder-color: #e5e7eb;           /* Light gray for placeholders */
+  --placeholder-color-dark: #4b5563;      /* Dark gray for dark mode */
+  --placeholder-glow-intensity: 0.7;      /* Opacity for glow effect */
+  --placeholder-wave-speed: 2s;           /* Animation speed for wave */
+  --placeholder-glow-speed: 1.5s;         /* Animation speed for glow */
+
+  /* ============================================
+     CONTAINER PATTERNS (BLUEPRINT/WIREFRAME)
+     ============================================ */
+  --grid-line-color: #d1d5db;             /* Grid line color */
+  --grid-line-color-dark: #374151;        /* Dark mode grid lines */
+  --grid-size: 20px;                      /* Grid spacing */
+  --blueprint-color: #3b82f6;             /* Blueprint blue */
+  --blueprint-bg: #eff6ff;                /* Light blue background */
+  --wireframe-color: #6b7280;             /* Wireframe gray */
+
+  /* ============================================
+     DEBUG SYSTEM
+     ============================================ */
+  --debug-bg: #1f2937;                    /* Dark background for debug messages */
+  --debug-text: #ffffff;                  /* White text for debug */
+  --debug-border: #ef4444;                /* Red border for debug elements */
+  --debug-success: #10b981;               /* Green for success debug */
+  --debug-warning: #f59e0b;               /* Orange for warning debug */
+  --debug-info: #06b6d4;                  /* Cyan for info debug */
+  --debug-z-index: 9999;                  /* High z-index for debug overlays */
+
+  /* ============================================
+     DEVELOPMENT COLORS
+     ============================================ */
+  --dev-pink: #ec4899;                    /* Hot pink for temporary styling */
+  --dev-yellow: #fbbf24;                  /* Bright yellow for highlights */
+  --dev-lime: #84cc16;                    /* Lime green for success tests */
+  --dev-orange: #f97316;                  /* Orange for warnings */
+  --dev-purple: #8b5cf6;                  /* Purple for special cases */
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --placeholder-color: var(--placeholder-color-dark);
+    --grid-line-color: var(--grid-line-color-dark);
+    --blueprint-bg: #1e3a8a;
+  }
+}
+
+/* ===================================================================
+   PLACEHOLDER SYSTEM
+   Bootstrap-inspired but more advanced
+   =================================================================== */
+
+/*
+ * BASE PLACEHOLDER
+ *
+ * Creates a gray background to represent missing content.
+ * Perfect for wireframes and prototypes.
+ */
+.placeholder {
+  background-color: var(--placeholder-color);
+  border-radius: var(--gui-radius, 0.375rem);
+  color: transparent;
+  cursor: default;
+  user-select: none;
+
+  /* Ensure placeholder has some size even if empty */
+  min-height: 1em;
+
+  /* Subtle animation to show it's a placeholder */
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.placeholder:hover {
+  opacity: 1;
+}
+
+/*
+ * PLACEHOLDER GLOW
+ *
+ * Softly pulsates to indicate loading or dynamic content.
+ * More subtle than wave, good for skeleton screens.
+ */
+.placeholder-glow {
+  background-color: var(--placeholder-color);
+  border-radius: var(--gui-radius, 0.375rem);
+  color: transparent;
+  cursor: default;
+  user-select: none;
+  min-height: 1em;
+
+  /* Gentle pulsing animation */
+  animation: placeholder-glow var(--placeholder-glow-speed) ease-in-out infinite alternate;
+}
+
+@keyframes placeholder-glow {
+  0% {
+    opacity: var(--placeholder-glow-intensity);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+ * PLACEHOLDER WAVE
+ *
+ * Creates a sliding shimmer effect like a loading bar.
+ * Great for indicating active loading states.
+ */
+.placeholder-wave {
+  background: linear-gradient(
+    90deg,
+    var(--placeholder-color) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    var(--placeholder-color) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--gui-radius, 0.375rem);
+  color: transparent;
+  cursor: default;
+  user-select: none;
+  min-height: 1em;
+
+  /* Sliding wave animation */
+  animation: placeholder-wave var(--placeholder-wave-speed) linear infinite;
+}
+
+@keyframes placeholder-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===================================================================
+   CONTAINER PATTERNS - OPEN SPACE CREATORS
+   Beyond placeholders - these create architectural space
+   =================================================================== */
+
+/*
+ * BLUEPRINT PATTERN
+ *
+ * Creates a blueprint/architectural drawing feel.
+ * Perfect for showing planned layouts and wireframes.
+ */
+.blueprint {
+  background-color: var(--blueprint-bg);
+  background-image:
+    /* Diagonal grid pattern */
+    repeating-linear-gradient(
+      315deg,
+      var(--blueprint-color) 0,
+      var(--blueprint-color) 1px,
+      transparent 0,
+      transparent var(--grid-size)
+    );
+  border: 2px dashed var(--blueprint-color);
+  border-radius: var(--gui-radius, 0.375rem);
+  position: relative;
+  min-height: 200px;
+
+  /* Subtle transparency to layer well */
+  opacity: 0.9;
+}
+
+.blueprint::before {
+  content: "BLUEPRINT";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--blueprint-color);
+  font-family: monospace;
+  opacity: 0.6;
+}
+
+/*
+ * GRID PATTERN
+ *
+ * Clean grid for laying out components.
+ * Helps visualize spacing and alignment.
+ */
+.grid-pattern {
+  background-image:
+    /* Vertical lines */
+    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+    /* Horizontal lines */
+    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  min-height: 200px;
+  border-radius: var(--gui-radius, 0.375rem);
+  position: relative;
+}
+
+.grid-pattern::before {
+  content: "GRID";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--grid-line-color);
+  font-family: monospace;
+  opacity: 0.7;
+}
+
+/*
+ * WIREFRAME PATTERN
+ *
+ * Subtle dotted border pattern for wireframing.
+ * Less intrusive than blueprint, good for content areas.
+ */
+.wireframe {
+  border: 2px dotted var(--wireframe-color);
+  background-color: transparent;
+  border-radius: var(--gui-radius, 0.375rem);
+  min-height: 100px;
+  position: relative;
+
+  /* Subtle background pattern */
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(107, 114, 128, 0.05) 10px,
+      rgba(107, 114, 128, 0.05) 20px
+    );
+}
+
+.wireframe::before {
+  content: "WIREFRAME";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  color: var(--wireframe-color);
+  font-family: monospace;
+  opacity: 0.5;
+  font-weight: bold;
+}
+
+/*
+ * CONSTRUCTION ZONE
+ *
+ * Bold pattern for areas under development.
+ * Impossible to ignore - perfect for temporary sections.
+ */
+.construction {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #fbbf24,
+      #fbbf24 20px,
+      #1f2937 20px,
+      #1f2937 40px
+    );
+  border: 3px solid #ef4444;
+  color: white;
+  text-align: center;
+  padding: var(--space-lg, 1rem);
+  font-weight: bold;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gui-radius, 0.375rem);
+}
+
+.construction::before {
+  content: "🚧 UNDER CONSTRUCTION 🚧";
+  font-size: 1.125rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================================================
+   DEBUG SYSTEM - CSS CONSOLE.LOG
+   =================================================================== */
+
+/*
+ * DEBUG MESSAGE SYSTEM
+ *
+ * Like console.log but visual! Shows debug info directly in the UI.
+ * Use data attributes to set messages:
+ * <div class="debug-message" data-debug="User ID: 12345">Content</div>
+ */
+.debug-message {
+  position: relative;
+}
+
+.debug-message::before {
+  content: attr(data-debug);
+  position: absolute;
+  top: -25px;
+  left: 0;
+  background-color: var(--debug-bg);
+  color: var(--debug-text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  z-index: var(--debug-z-index);
+  border-left: 3px solid var(--debug-info);
+
+  /* Only show on hover by default */
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.debug-message:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Always visible debug messages */
+.debug-message.debug-visible::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Debug message variants */
+.debug-message.debug-success::before {
+  border-left-color: var(--debug-success);
+}
+
+.debug-message.debug-warning::before {
+  border-left-color: var(--debug-warning);
+}
+
+.debug-message.debug-error::before {
+  border-left-color: var(--debug-border);
+}
+
+/*
+ * DEBUG OUTLINE
+ *
+ * Highlights element boundaries for layout debugging.
+ * Shows the exact space an element occupies.
+ */
+.debug-outline {
+  outline: 2px solid var(--debug-border) !important;
+  outline-offset: -1px;
+  position: relative;
+}
+
+.debug-outline::after {
+  content: attr(data-debug-label);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--debug-border);
+  color: white;
+  padding: 2px 6px;
+  font-size: 0.625rem;
+  font-family: monospace;
+  font-weight: bold;
+  z-index: var(--debug-z-index);
+}
+
+/*
+ * DEBUG GRID
+ *
+ * Shows CSS Grid lines and areas for debugging layouts.
+ */
+.debug-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ===================================================================
+   DEVELOPMENT UTILITIES
+   Tools from other frameworks and custom additions
+   =================================================================== */
+
+/*
+ * TEMPORARY STYLING
+ *
+ * Bright, obvious colors for temporary development styling.
+ * These should never make it to production!
+ */
+.temp-pink { background-color: var(--dev-pink) !important; }
+.temp-yellow { background-color: var(--dev-yellow) !important; }
+.temp-lime { background-color: var(--dev-lime) !important; }
+.temp-orange { background-color: var(--dev-orange) !important; }
+.temp-purple { background-color: var(--dev-purple) !important; }
+
+/* Make temp colors very obvious */
+.temp-pink,
+.temp-yellow,
+.temp-lime,
+.temp-orange,
+.temp-purple {
+  border: 3px dashed #000 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+/*
+ * RESIZE HANDLES
+ *
+ * Visual resize handles for testing responsive components.
+ */
+.resize-handle {
+  resize: both;
+  overflow: auto;
+  border: 2px dashed var(--wireframe-color);
+  min-width: 200px;
+  min-height: 100px;
+  background:
+    linear-gradient(45deg, transparent 40%, var(--wireframe-color) 40%, var(--wireframe-color) 60%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, var(--wireframe-color) 40%, var(--wireframe-color) 60%, transparent 60%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+/*
+ * BREAKPOINT INDICATORS
+ *
+ * Show which breakpoint is currently active.
+ * Helpful for responsive design debugging.
+ */
+.breakpoint-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: var(--debug-bg);
+  color: var(--debug-text);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.875rem;
+  z-index: var(--debug-z-index);
+  border: 2px solid var(--debug-info);
+}
+
+.breakpoint-indicator::before {
+  content: "XS (<640px)";
+}
+
+@media (min-width: 640px) {
+  .breakpoint-indicator::before {
+    content: "SM (≥640px)";
+  }
+}
+
+@media (min-width: 768px) {
+  .breakpoint-indicator::before {
+    content: "MD (≥768px)";
+  }
+}
+
+@media (min-width: 1024px) {
+  .breakpoint-indicator::before {
+    content: "LG (≥1024px)";
+  }
+}
+
+@media (min-width: 1280px) {
+  .breakpoint-indicator::before {
+    content: "XL (≥1280px)";
+  }
+}
+
+@media (min-width: 1536px) {
+  .breakpoint-indicator::before {
+    content: "2XL (≥1536px)";
+  }
+}
+
+/*
+ * LOREM IPSUM GENERATORS
+ *
+ * CSS-only content generation for prototyping.
+ */
+.lorem::after {
+  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.";
+}
+
+.lorem-short::after {
+  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+}
+
+.lorem-long::after {
+  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+}
+
+/*
+ * ASPECT RATIO BOXES
+ *
+ * Helpful for testing different aspect ratios during development.
+ */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+  background: var(--placeholder-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  color: var(--wireframe-color);
+  font-weight: bold;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+  background: var(--placeholder-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  color: var(--wireframe-color);
+  font-weight: bold;
+}
+
+.aspect-square::after {
+  content: "1:1";
+}
+
+.aspect-video::after {
+  content: "16:9";
+}
+
+/*
+ * PERFORMANCE INDICATORS
+ *
+ * Visual indicators for performance testing.
+ */
+.slow-animation {
+  animation: slow-spin 5s linear infinite;
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.performance-heavy {
+  background:
+    radial-gradient(circle at 25% 25%, #ff6b6b 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, #4ecdc4 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, #45b7d1 0%, transparent 50%),
+    radial-gradient(circle at 25% 75%, #f9ca24 0%, transparent 50%);
+  animation: performance-heavy 2s ease-in-out infinite alternate;
+}
+
+@keyframes performance-heavy {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* ===================================================================
+   FRAMEWORK-INSPIRED UTILITIES
+   Best tools from other frameworks adapted for our system
+   =================================================================== */
+
+/*
+ * TAILWIND-INSPIRED DEBUG UTILITIES
+ */
+.debug-screens {
+  position: relative;
+}
+
+.debug-screens::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid red;
+  pointer-events: none;
+}
+
+/*
+ * BOOTSTRAP-INSPIRED DEVELOPMENT CLASSES
+ */
+.dev-border-primary { border: 2px solid var(--debug-info) !important; }
+.dev-border-success { border: 2px solid var(--debug-success) !important; }
+.dev-border-warning { border: 2px solid var(--debug-warning) !important; }
+.dev-border-error { border: 2px solid var(--debug-border) !important; }
+
+/*
+ * FOUNDATION-INSPIRED VISIBILITY HELPERS
+ */
+.show-for-large {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .show-for-large {
+    display: block;
+  }
+}
+
+.hide-for-large {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .hide-for-large {
+    display: none;
+  }
+}
+
+/*
+ * BULMA-INSPIRED HELPER CLASSES
+ */
+.is-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.is-loading::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 1em);
+  left: calc(50% - 1em);
+  width: 2em;
+  height: 2em;
+  border: 2px solid var(--placeholder-color);
+  border-top-color: var(--debug-info);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===================================================================
+   PRODUCTION SAFETY
+   Remove all development styles in production
+   =================================================================== */
+
+/*
+ * PRODUCTION MODE
+ *
+ * Add this class to <body> to hide all development utilities.
+ * Perfect for production builds.
+ */
+.production-mode .debug-message::before,
+.production-mode .debug-outline::after,
+.production-mode .breakpoint-indicator,
+.production-mode .temp-pink,
+.production-mode .temp-yellow,
+.production-mode .temp-lime,
+.production-mode .temp-orange,
+.production-mode .temp-purple,
+.production-mode .blueprint::before,
+.production-mode .grid-pattern::before,
+.production-mode .wireframe::before {
+  display: none !important;
+}
+
+.production-mode .construction {
+  display: none !important;
+}

@@ -1,0 +1,107 @@
+ :root {
+  /* level: up1 */
+  --up1-caption: #13263c;
+  --up1-backdrop: #132438;
+  --up1-background: #13253a;
+  --up1-border: #14263d;
+  --up1-raised: #14263d;
+  --up1-foreground: #142740;
+  --up1-text: #14273f;
+  --up1-link: #142740;
+  /* level: up2 */
+  --up2-caption: #244b60;
+  --up2-backdrop: #224859;
+  --up2-background: #23495c;
+  --up2-border: #254d63;
+  --up2-raised: #254d63;
+  --up2-foreground: #264f67;
+  --up2-text: #264e65;
+  --up2-link: #264f67;
+  /* level: up3 */
+  --up3-caption: #357285;
+  --up3-backdrop: #316d7a;
+  --up3-background: #326e7e;
+  --up3-border: #367488;
+  --up3-raised: #367488;
+  --up3-foreground: #38778e;
+  --up3-text: #37768b;
+  --up3-link: #38778e;
+  /* level: up4 */
+  --up4-caption: #2b6078;
+  --up4-backdrop: #285b6f;
+  --up4-background: #295c72;
+  --up4-border: #2c617b;
+  --up4-raised: #2c617b;
+  --up4-foreground: #2d6481;
+  --up4-text: #2c637e;
+  --up4-link: #2d6481;
+  /* level: up5 */
+  --up5-caption: #183b5a;
+  --up5-backdrop: #173854;
+  --up5-background: #183956;
+  --up5-border: #193c5d;
+  --up5-raised: #193c5d;
+  --up5-foreground: #193e61;
+  --up5-text: #193d5f;
+  --up5-link: #193e61;
+}
+
+/* level: up1 */
+.up {
+  --caption: var(--up1-caption);
+  --backdrop: var(--up1-backdrop);
+  --background: var(--up1-background);
+  --border: var(--up1-border);
+  --raised: var(--up1-raised);
+  --foreground: var(--up1-foreground);
+  --text: var(--up1-text);
+  --link: var(--up1-link);
+
+  /* level: up2 */
+  .up {
+    --caption: var(--up2-caption);
+    --backdrop: var(--up2-backdrop);
+    --background: var(--up2-background);
+    --border: var(--up2-border);
+    --raised: var(--up2-raised);
+    --foreground: var(--up2-foreground);
+    --text: var(--up2-text);
+    --link: var(--up2-link);
+
+    /* level: up3 */
+    .up {
+      --caption: var(--up3-caption);
+      --backdrop: var(--up3-backdrop);
+      --background: var(--up3-background);
+      --border: var(--up3-border);
+      --raised: var(--up3-raised);
+      --foreground: var(--up3-foreground);
+      --text: var(--up3-text);
+      --link: var(--up3-link);
+
+      /* level: up4 */
+      .up {
+        --caption: var(--up4-caption);
+        --backdrop: var(--up4-backdrop);
+        --background: var(--up4-background);
+        --border: var(--up4-border);
+        --raised: var(--up4-raised);
+        --foreground: var(--up4-foreground);
+        --text: var(--up4-text);
+        --link: var(--up4-link);
+
+        /* level: up5 */
+        .up {
+          --caption: var(--up5-caption);
+          --backdrop: var(--up5-backdrop);
+          --background: var(--up5-background);
+          --border: var(--up5-border);
+          --raised: var(--up5-raised);
+          --foreground: var(--up5-foreground);
+          --text: var(--up5-text);
+          --link: var(--up5-link);
+        }
+      }
+    }
+  }
+}

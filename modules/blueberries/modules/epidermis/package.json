@@ -1,0 +1,27 @@
+{
+  "name": "epidermis",
+  "description": "epidermis is truly next-generation - it turns CSS into a complete development toolkit that goes far beyond what any existing framework offers!",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "demo": "http-server -c-1 -o .",
+    "test": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(pathToFileURL(\"./import-map-hooks.js\"));' --test",
+    "save": "git add .; git commit -m 'Updated Release'; npm version patch; npm publish; git push --follow-tags;"
+  },
+  "keywords": [
+    "css",
+    "reset",
+    "ui"
+  ],
+  "author": "@catpea",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/catpea/epidermis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catpea/epidermis/issues"
+  },
+  "homepage": "https://github.com/catpea/epidermis#readme"
+}

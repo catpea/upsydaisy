@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "#example-component": "./example-component/ExampleComponent.js"
+  }
+}

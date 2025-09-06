@@ -1,0 +1,40 @@
+:root {
+
+  --text: #e0e0e0;
+  --link: #a0a0a0;
+
+  --padding: 1rem;
+  --rounded: 8px;
+
+  /* Background */
+  --l1-bg: hsl(199deg 81% 6%);
+  --l2-bg: hsl(199deg 80% 15%);
+  --l3-bg: hsl(204deg 63% 15%);
+  --l4-bg: hsl(200deg 75% 10%);
+  --l5-bg: hsl(200deg 75% 9%);
+
+  /* Border */
+  --l1-br: hsl(199deg 81% 11%);
+  --l2-br: hsl(199deg 80% 12%);
+  --l3-br: hsl(204deg 63% 12%);
+  --l4-br: hsl(200deg 75% 8%);
+  --l5-br: hsl(172deg 92% 12%);
+
+  /* Foreground */
+  --l1-fg: hsl(199deg 81% 11%);
+  --l2-fg: hsl(199deg 80% 12%);
+  --l3-fg: hsl(204deg 63% 12%);
+  --l4-fg: hsl(200deg 75% 8%);
+  --l5-fg: hsl(172deg 92% 12%);
+
+  /* Shadow */
+  --l1-sh: rgba(0,0,0,0.3);
+  --l2-sh: rgba(0,0,0,0.3);
+  --l3-sh: rgba(0,0,0,0.3);
+  --l4-sh: rgba(0,0,0,0.3);
+  --l5-sh: rgba(0,0,0,0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+
+}

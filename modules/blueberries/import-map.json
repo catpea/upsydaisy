@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "#offcanvas-panel": "./offcanvas-panel/Component.js",
+    "#outline-button": "./outline-button/Component.js",
+    "#theme-customizer": "./theme-customizer/Component.js",
+
+    "#ladybits": "./node_modules/ladybits/index.js"
+  }
+}

@@ -1,0 +1,700 @@
+/* ===================================================================
+   CSS CUSTOM PROPERTIES (VARIABLES) - THE DESIGN SYSTEM
+   =================================================================== */
+
+:root {
+  /* ============================================
+     SPACING SYSTEM
+     Use consistent spacing throughout all controls
+     ============================================ */
+  --space-xs: 0.25rem;  /* 4px  - tight spacing */
+  --space-sm: 0.5rem;   /* 8px  - small spacing */
+  --space-md: 0.75rem;  /* 12px - medium spacing */
+  --space-lg: 1rem;     /* 16px - large spacing */
+  --space-xl: 1.5rem;   /* 24px - extra large spacing */
+
+  /* ============================================
+     BORDER SYSTEM
+     One place to control all borders and outlines
+     ============================================ */
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: #d1d5db;        /* Light gray border */
+  --border-color-hover: #9ca3af;  /* Darker on hover */
+  --border-color-focus: #3b82f6;  /* Blue when focused */
+  --border-color-error: #ef4444;  /* Red for errors */
+  --border-color-success: #10b981; /* Green for success */
+
+  /* Computed border values - change the above to affect all borders */
+  --border: var(--border-width) var(--border-style) var(--border-color);
+  --border-hover: var(--border-width) var(--border-style) var(--border-color-hover);
+  --border-focus: var(--border-width) var(--border-style) var(--border-color-focus);
+
+  /* ============================================
+     RADIUS SYSTEM
+     Single variable controls ALL rounded corners
+     Change this one value to make everything sharp or rounded
+     ============================================ */
+  --border-radius: 0.375rem;  /* 6px - Change this to 0 for sharp, 1rem for very rounded */
+  --border-radius-sm: calc(var(--border-radius) * 0.5);  /* Half radius for small elements */
+  --border-radius-lg: calc(var(--border-radius) * 1.5);  /* Larger radius for big elements */
+
+  /* ============================================
+     FOCUS SYSTEM
+     Consistent focus indicators across all controls
+     ============================================ */
+  --focus-ring-width: 2px;
+  --focus-ring-style: solid;
+  --focus-ring-color: var(--border-color-focus);
+  --focus-ring-offset: 2px;
+  --focus-ring: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+
+  /* ============================================
+     COLOR SYSTEM
+     Semantic colors that work together
+     ============================================ */
+  --color-text: #374151;           /* Dark gray text */
+  --color-text-light: #6b7280;    /* Lighter gray text */
+  --color-text-white: #ffffff;    /* White text for dark backgrounds */
+
+  --color-bg: #ffffff;             /* White background */
+  --color-bg-gray: #f9fafb;       /* Light gray background */
+  --color-bg-dark: #1f2937;       /* Dark background */
+
+  --color-primary: #3b82f6;       /* Blue - for primary actions */
+  --color-primary-hover: #2563eb; /* Darker blue on hover */
+  --color-primary-light: #eff6ff; /* Very light blue background */
+
+  --color-success: #10b981;       /* Green - for success states */
+  --color-warning: #f59e0b;       /* Orange - for warnings */
+  --color-error: #ef4444;         /* Red - for errors */
+  --color-info: #06b6d4;          /* Cyan - for info */
+
+  /* ============================================
+     SHADOW SYSTEM
+     Consistent elevation/depth
+     ============================================ */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ============================================
+     TYPOGRAPHY SYSTEM
+     Consistent font sizes and weights
+     ============================================ */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+
+  --font-size-sm: 0.6rem;
+  --font-size-base: 0.7rem;
+  --font-size-lg: 0.8rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* ============================================
+     TRANSITION SYSTEM
+     Smooth, consistent animations
+     ============================================ */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+}
+
+/* Dark mode color overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border-color: #4b5563;
+    --border-color-hover: #6b7280;
+
+    --color-text: #f3f4f6;
+    --color-text-light: #d1d5db;
+    --color-bg: #1f2937;
+    --color-bg-gray: #111827;
+
+
+  }
+}
+
+/* ===================================================================
+   BASE INPUT STYLES
+   Shared styles for all form controls
+   =================================================================== */
+
+/*
+ * COMMON INPUT BASE
+ *
+ * These styles apply to all form controls that accept text input.
+ * By grouping common properties, we ensure consistency and make
+ * it easy to change the appearance of all inputs at once.
+ */
+.input-base,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+textarea,
+select {
+  /* Layout */
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+
+  /* Typography */
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+  color: var(--color-text);
+
+  /* Appearance */
+  background-color: var(--color-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+
+  /* Transitions for smooth interactions */
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+
+  /* Remove browser defaults */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/*
+ * INPUT STATES
+ *
+ * Consistent hover, focus, and error states across all inputs.
+ * Change these variables to affect ALL form controls at once.
+ */
+.input-base:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="search"]:hover,
+input[type="url"]:hover,
+input[type="tel"]:hover,
+input[type="number"]:hover,
+input[type="date"]:hover,
+input[type="datetime-local"]:hover,
+input[type="month"]:hover,
+input[type="week"]:hover,
+input[type="time"]:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--border-color-hover);
+}
+
+.input-base:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--border-color-focus);
+  box-shadow: 0 0 0 var(--focus-ring-width) rgb(59 130 246 / 0.1);
+}
+
+.input-base:disabled,
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="url"]:disabled,
+input[type="tel"]:disabled,
+input[type="number"]:disabled,
+input[type="date"]:disabled,
+input[type="datetime-local"]:disabled,
+input[type="month"]:disabled,
+input[type="week"]:disabled,
+input[type="time"]:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ===================================================================
+   SPECIFIC INPUT TYPES
+   =================================================================== */
+
+/*
+ * TEXTAREA SPECIFIC STYLES
+ *
+ * Textareas need some special handling for resize behavior
+ * and minimum height.
+ */
+textarea {
+  min-height: calc(2.5em + 2 * var(--space-sm));
+  resize: vertical; /* Allow vertical resize only */
+}
+
+/*
+ * SELECT DROPDOWN STYLES
+ *
+ * Custom dropdown arrow that matches our design system.
+ * The background-image creates a custom arrow icon.
+ */
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right var(--space-sm) center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: calc(var(--space-md) + 1.5em + var(--space-sm));
+}
+
+/* ===================================================================
+   CHECKBOX AND RADIO BUTTONS
+   =================================================================== */
+
+/*
+ * CUSTOM CHECKBOX AND RADIO STYLES
+ *
+ * These create consistent, customizable checkboxes and radios
+ * that use our design system variables.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  /* Reset default appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Size and positioning */
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+
+  /* Appearance */
+  background-color: var(--color-bg);
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+
+  /* Center any checkmarks */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Smooth transitions */
+  transition: background-color var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+/* Radio buttons should be circular */
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+/* Hover states */
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+  border-color: var(--border-color-hover);
+}
+
+/* Focus states */
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+  outline: none;
+  border-color: var(--border-color-focus);
+  box-shadow: 0 0 0 var(--focus-ring-width) rgb(59 130 246 / 0.1);
+}
+
+/* Checked states */
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Checkmark for checkbox */
+input[type="checkbox"]:checked::before {
+  content: "✓";
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Dot for radio button */
+input[type="radio"]:checked::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* ===================================================================
+   BUTTON STYLES
+   =================================================================== */
+
+/*
+ * BASE BUTTON STYLES
+ *
+ * All buttons share these common properties for consistency.
+ * Different button variants are created by overriding colors.
+ */
+.btn,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
+
+  /* Typography */
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  text-decoration: none;
+
+  /* Appearance */
+  background-color: var(--color-bg-gray);
+  color: var(--color-text);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+
+  /* Interactions */
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  /* Remove default button styles */
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Button hover state */
+.btn:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: var(--color-bg);
+  border-color: var(--border-color-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Button focus state */
+.btn:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring-width) rgb(59 130 246 / 0.1);
+}
+
+/* Button active state */
+.btn:active,
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Disabled button state */
+.btn:disabled,
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  background-color: var(--color-bg-gray);
+}
+
+/* ===================================================================
+   BUTTON VARIANTS
+   Easy to customize button styles using our color system
+   =================================================================== */
+
+/* Primary button - for main actions */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+/* Success button - for positive actions */
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-text-white);
+  border-color: var(--color-success);
+}
+
+/* Error/Danger button - for destructive actions */
+.btn-error {
+  background-color: var(--color-error);
+  color: var(--color-text-white);
+  border-color: var(--color-error);
+}
+
+/* Outline buttons - secondary style */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+}
+
+/* ===================================================================
+   INPUT VARIANTS
+   Consistent styling for different input states
+   =================================================================== */
+
+/* Error state for inputs */
+.input-error {
+  border-color: var(--border-color-error);
+}
+
+.input-error:focus {
+  border-color: var(--border-color-error);
+  box-shadow: 0 0 0 var(--focus-ring-width) rgb(239 68 68 / 0.1);
+}
+
+/* Success state for inputs */
+.input-success {
+  border-color: var(--border-color-success);
+}
+
+.input-success:focus {
+  border-color: var(--border-color-success);
+  box-shadow: 0 0 0 var(--focus-ring-width) rgb(16 185 129 / 0.1);
+}
+
+/* ===================================================================
+   SIZE VARIANTS
+   Consistent sizing across all controls
+   =================================================================== */
+
+/* Small controls */
+.control-sm {
+  padding: calc(var(--space-xs)) var(--space-sm);
+  font-size: var(--font-size-sm);
+  border-radius: var(--border-radius-sm);
+}
+
+/* Large controls */
+.control-lg {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius-lg);
+}
+
+/* ===================================================================
+   FORM LAYOUT UTILITIES
+   =================================================================== */
+
+/*
+ * FORM GROUP
+ *
+ * Consistent spacing between form elements
+ */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * FORM LABELS
+ *
+ * Consistent label styling that works with our inputs
+ */
+.form-label,
+label {
+  display: block;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-sm);
+}
+
+/*
+ * HELP TEXT
+ *
+ * For additional context or error messages
+ */
+.form-help {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin-top: var(--space-xs);
+}
+
+.form-help.error {
+  color: var(--color-error);
+}
+
+.form-help.success {
+  color: var(--color-success);
+}
+
+/* ===================================================================
+   UTILITY CLASSES
+   Most useful utilities inspired by modern CSS frameworks
+   =================================================================== */
+
+/* ============ SPACING UTILITIES ============ */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-xs); }
+.m-2 { margin: var(--space-sm); }
+.m-3 { margin: var(--space-md); }
+.m-4 { margin: var(--space-lg); }
+.m-6 { margin: var(--space-xl); }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--space-xs); }
+.mt-2 { margin-top: var(--space-sm); }
+.mt-3 { margin-top: var(--space-md); }
+.mt-4 { margin-top: var(--space-lg); }
+.mt-6 { margin-top: var(--space-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--space-xs); }
+.mb-2 { margin-bottom: var(--space-sm); }
+.mb-3 { margin-bottom: var(--space-md); }
+.mb-4 { margin-bottom: var(--space-lg); }
+.mb-6 { margin-bottom: var(--space-xl); }
+
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-xs); }
+.p-2 { padding: var(--space-sm); }
+.p-3 { padding: var(--space-md); }
+.p-4 { padding: var(--space-lg); }
+.p-6 { padding: var(--space-xl); }
+
+/* ============ DISPLAY UTILITIES ============ */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+
+/* ============ FLEXBOX UTILITIES ============ */
+.flex-row { flex-direction: row; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-initial { flex: 0 1 auto; }
+.flex-none { flex: none; }
+
+/* ============ WIDTH UTILITIES ============ */
+.w-auto { width: auto; }
+.w-full { width: 100%; }
+.w-1\/2 { width: 50%; }
+.w-1\/3 { width: 33.333333%; }
+.w-2\/3 { width: 66.666667%; }
+.w-1\/4 { width: 25%; }
+.w-3\/4 { width: 75%; }
+
+/* ============ TEXT UTILITIES ============ */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+
+.text-gray { color: var(--color-text-light); }
+.text-primary { color: var(--color-primary); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+
+/* ============ BORDER UTILITIES ============ */
+.border { border: var(--border); }
+.border-0 { border: 0; }
+.border-t { border-top: var(--border); }
+.border-r { border-right: var(--border); }
+.border-b { border-bottom: var(--border); }
+.border-l { border-left: var(--border); }
+
+.rounded { border-radius: var(--border-radius); }
+.rounded-sm { border-radius: var(--border-radius-sm); }
+.rounded-lg { border-radius: var(--border-radius-lg); }
+.rounded-full { border-radius: 9999px; }
+.rounded-none { border-radius: 0; }
+
+/* ============ SHADOW UTILITIES ============ */
+.shadow { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-none { box-shadow: none; }
+
+/* ============ BACKGROUND UTILITIES ============ */
+.bg-white { background-color: var(--color-bg); }
+.bg-gray { background-color: var(--color-bg-gray); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-success { background-color: var(--color-success); }
+.bg-error { background-color: var(--color-error); }
+
+
+
+.container {
+  width: min(100%, 992px);
+  margin: 0 auto; /* Center the container */
+}

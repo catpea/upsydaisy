@@ -1,0 +1,25 @@
+{
+  "name": "ladybits",
+  "version": "2.0.3",
+  "description": "Lightweight reactive library featuring autodependencies and state, derived and effect.",
+  "main": "index.js",
+  "scripts": {
+    "save": "git add .; git commit -m 'Updated Release'; git push; npm version patch; npm publish; git push;"
+  },
+  "keywords": [
+    "state",
+    "derived",
+    "effect",
+    "frp"
+  ],
+  "author": "@catpea",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/catpea/ladybits.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catpea/ladybits/issues"
+  },
+  "homepage": "https://github.com/catpea/ladybits#readme"
+}

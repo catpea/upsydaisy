@@ -1,0 +1,50 @@
+     .card {
+            display: grid;
+            grid-template-areas:
+                "caption"
+                "image"
+                "body"
+                "list"
+                "footer";
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            grid-area: caption;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        figure {
+            grid-area: image;
+            margin: 0;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        section {
+            grid-area: body;
+            padding: 10px;
+        }
+
+        ul {
+            grid-area: list;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }

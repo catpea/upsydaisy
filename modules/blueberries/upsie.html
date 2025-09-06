@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" color-mode="dark">
+  <head>
+    <style id="cssPreview"></style>
+
+    <style>
+      --debug-show-component-names: inline;
+    </style>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo UI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>" />
+
+    <link href="modules/epidermis/reset.css" rel="stylesheet" />
+    <link href="modules/epidermis/controls.css" rel="stylesheet" />
+
+    <link href="theme.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <script src="assets/prism/prism.js" data-manual></script>
+    <link href="assets/prism/prism.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-css.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "#link-style": "./link-style/LinkStyle.js",
+
+          "#offcanvas-panel": "./offcanvas-panel/OffcanvasPanel.js",
+          "#switch-panel": "./switch-panel/SwitchPanel.js",
+          "#tab-panel": "./tab-panel/TabPanel.js",
+          "#horizontal-view": "./horizontal-view/HorizontalView.js",
+
+          "#gradient-bar": "./gradient-bar/GradientBar.js",
+          "#gradient-stops": "./gradient-stops/GradientStops.js",
+          "#theme-grid": "./theme-grid/ThemeGrid.js",
+
+          "#gradient-builder": "./gradient-builder/GradientBuilder.js",
+          "#level-builder": "./level-builder/LevelBuilder.js",
+
+          "#theme-customizer": "./theme-customizer/ThemeCustomizer.js",
+
+          "#iridescence": "./modules/iridescence/index.js",
+          "#heebiejeebies": "./modules/heebiejeebies/index.js",
+          "#mlue": "./modules/mlue/index.js",
+          "#sinusoid": "./modules/sinusoid/index.js",
+          "#ladybits": "./modules/ladybits/index.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import { LinkStyle } from "#link-style";
+      import { OffcanvasPanel } from "#offcanvas-panel";
+      import { SwitchPanel } from "#switch-panel";
+      import { TabPanel } from "#tab-panel";
+      import { HorizontalView } from "#horizontal-view";
+
+      import { GradientBar } from "#gradient-bar";
+      import { GradientStops } from "#gradient-stops";
+      import { ThemeGrid } from "#theme-grid";
+
+      import { GradientBuilder } from "#gradient-builder";
+      import { LevelBuilder } from "#level-builder";
+
+      import { ThemeCustomizer } from "#theme-customizer";
+
+      customElements.define("link-style", LinkStyle);
+
+      customElements.define("offcanvas-panel", OffcanvasPanel);
+      customElements.define("switch-panel", SwitchPanel);
+
+      customElements.define("tab-panel", TabPanel);
+      customElements.define("horizontal-view", HorizontalView);
+
+      customElements.define("gradient-bar", GradientBar);
+      customElements.define("gradient-stops", GradientStops);
+      customElements.define("theme-grid", ThemeGrid);
+
+      customElements.define("gradient-builder", GradientBuilder);
+      customElements.define("level-builder", LevelBuilder);
+
+      customElements.define("theme-customizer", ThemeCustomizer);
+    </script>
+  </head>
+  <body style="padding-top: 4rem;">
+
+    <div class="container">
+
+    <link href="application.css" rel="stylesheet" />
+
+    <web-application class="sidebar-application theme1">
+      <header>My Application</header>
+
+      <figure>
+        <img src="logo.svg" alt="App Logo" />
+      </figure>
+
+      <!-- Search box -->
+      <search-form placeholder="Search…">searchform</search-form>
+
+      <!-- Profile / user info -->
+      <user-info fullname="Jane Doe" username="jdoe" avatar="jdoe.png">user info</user-info>
+
+      <!-- Main navigation menu -->
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Projects</a></li>
+        </ul>
+      </nav>
+
+      <!-- Alerts / notifications -->
+      <alert-region> INFO: Action Complete </alert-region>
+
+      <!-- Properties / inspector panel -->
+      <aside>
+        <h2>Properties</h2>
+        <!-- content -->
+      </aside>
+
+      <!-- Main workspace -->
+      <main>
+        <h1>Welcome</h1>
+        <p style="min-height: 20rem">Main application content goes here.</p>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <small>&copy; 2025 MyCompany</small>
+      </footer>
+    </web-application>
+
+  </div>
+</html>

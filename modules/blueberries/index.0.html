@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en" color-mode="dark">
+  <head>
+    <style id="cssPreview"></style>
+
+    <style>
+      --debug-show-component-names: inline;
+    </style>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo UI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>" />
+
+    <!-- <link href="reset.css" rel="stylesheet">
+    <link href="controls.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet"> -->
+
+    <link href="modules/epidermis/reset.css" rel="stylesheet" />
+    <link href="modules/epidermis/controls.css" rel="stylesheet" />
+
+    <link href="theme.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <script src="assets/prism/prism.js" data-manual></script>
+    <link href="assets/prism/prism.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-css.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "#link-style": "./link-style/LinkStyle.js",
+
+          "#offcanvas-panel": "./offcanvas-panel/OffcanvasPanel.js",
+          "switch-panel": "./switch-panel/SwitchPanel.js",
+          "#tab-panel": "./tab-panel/TabPanel.js",
+          "#horizontal-view": "./horizontal-view/HorizontalView.js",
+
+
+          "#gradient-bar": "./gradient-bar/GradientBar.js",
+          "#gradient-stops": "./gradient-stops/GradientStops.js",
+          "#theme-grid": "./theme-grid/ThemeGrid.js",
+
+          "#gradient-builder": "./gradient-builder/GradientBuilder.js",
+          "#level-builder": "./level-builder/LevelBuilder.js",
+
+          "#theme-customizer": "./theme-customizer/ThemeCustomizer.js",
+
+          "#iridescence": "./modules/iridescence/index.js",
+          "#heebiejeebies": "./modules/heebiejeebies/index.js",
+          "#mlue": "./modules/mlue/index.js",
+          "#sinusoid": "./modules/sinusoid/index.js",
+          "#ladybits": "./modules/ladybits/index.js"
+        }
+      }
+    </script>
+
+    <!--
+
+
+              "#heebiejeebies": "https://cdn.jsdelivr.net/npm/heebiejeebies/index.js",
+          "#mlue": "https://cdn.jsdelivr.net/npm/mlue/index.js",
+          "#sinusoid": "https://cdn.jsdelivr.net/npm/sinusoid/index.js",
+
+          "#ladybits": "https://cdn.jsdelivr.net/npm/ladybits@2.0.2/+esm"
+
+
+          "#mlue": "https://cdn.jsdelivr.net/npm/mlue@1.0.8/+esm"
+          "#outline-button": "./outline-button/OutlineButton.js",
+          "#color-canvas":      "./color-canvas/Component.js",
+          "#input-hsl":      "./input-hsl/Component.js",
+    USE IF LOCAL DEV IS NEEDED
+    "#ladybits": "./node_modules/ladybits/index.js"
+    "https://esm.run/ladybits" is just https://cdn.jsdelivr.net/npm/ladybits@2.0.2/+esm
+
+    -->
+
+    <script type="module">
+
+      import { LinkStyle } from "#link-style";
+      import { OffcanvasPanel } from "#offcanvas-panel";
+      import { SwitchPanel } from "#switch-panel";
+      import { TabPanel } from "#tab-panel";
+      import { HorizontalView } from "#horizontal-view";
+
+      import { GradientBar } from "#gradient-bar";
+      import { GradientStops } from "#gradient-stops";
+      import { ThemeGrid } from "#theme-grid";
+
+      import { GradientBuilder } from "#gradient-builder";
+      import { LevelBuilder } from "#level-builder";
+
+      import { ThemeCustomizer } from "#theme-customizer";
+
+      // import { OutlineButton } from "#outline-button";
+      // import { ColorCanvas } from "#color-canvas";
+      // import { InputHsl } from "#input-hsl";
+
+      customElements.define("link-style", LinkStyle);
+
+      customElements.define("offcanvas-panel", OffcanvasPanel);
+      customElements.define("switch-panel", SwitchPanel);
+
+      customElements.define("tab-panel", TabPanel);
+      customElements.define("horizontal-view", HorizontalView);
+
+      customElements.define("gradient-bar", GradientBar);
+      customElements.define("gradient-stops", GradientStops);
+      customElements.define("theme-grid", ThemeGrid);
+
+      customElements.define("gradient-builder", GradientBuilder);
+      customElements.define("level-builder", LevelBuilder);
+
+      customElements.define("theme-customizer", ThemeCustomizer);
+    </script>
+  </head>
+  <body>
+    <!-- <button data-offcanvas-toggle data-offcanvas-target="#sidebar">Open</button> -->
+
+    <style>
+      body {
+        padding-top: 3rem;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+      #page {
+        box-shadow: 2px 0 24px 0 rgba(0, 0, 0, 0.3);
+        display: grid;
+        width: 100%;
+        grid-template-areas:
+          "preview"
+          "head"
+          "main"
+          "foot";
+        grid-template-rows: auto;
+        grid-template-columns: 1fr;
+      }
+
+      #page > .preview {
+        padding: 1rem;
+      }
+
+      #page > header {
+        grid-area: head;
+
+        background-color: var(--l4-bg);
+        border-top-left-radius: var(--rounded);
+        border-top-right-radius: var(--rounded);
+
+        padding: 4px;
+
+        [data-offcanvas-toggle] {
+          font-size: 2rem;
+        }
+      }
+
+      #page > nav {
+        grid-area: nav;
+        background-color: var(--l3-bg);
+        ul {
+          li {
+            list-style: none;
+            transition: 0.2s;
+            &:hover {
+              transform: translateX(4px);
+            }
+            a {
+              text-decoration: none;
+              color: var(--link);
+              line-height: 1.7rem;
+              transition: 0.4s;
+              border-radius: 4px;
+              padding: 4px 7px;
+
+              &:hover {
+                background: rgba(0, 0, 0, 0.2);
+              }
+            }
+          }
+        }
+      }
+
+      #page > main {
+        grid-area: main;
+        background-color: var(--l2-bg);
+
+        /*padding: 2rem;*/
+
+        /*display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: auto;
+      grid-gap: 1rem;*/
+      }
+
+      #page > footer {
+        padding: var(--padding);
+
+        border-bottom-left-radius: var(--rounded);
+        border-bottom-right-radius: var(--rounded);
+
+        grid-area: foot;
+        background-color: var(--l5-bg);
+      }
+    </style>
+
+
+
+
+
+
+
+
+
+    <div class="container">
+
+
+      <div id="page">
+        <header>
+          <button data-offcanvas-toggle data-offcanvas-target="#sidebar" style="color: var(--l1-bg); cursor: pointer">&#9776;</button>
+        </header>
+
+        <main>
+
+
+          <tab-panel>
+
+            <section data-title="Meow!">
+              <theme-customizer>
+
+              </theme-customizer>
+            </section>
+
+            <section data-title="About">
+              <div class="card">
+                <div class="card-details">
+                  <h3>About</h3>
+
+                  <p>Your theming system sounds incredibly elegant! The idea of:</p>
+
+                  <p>5 levels (dark to bright) controlled by a vertical gradient</p>
+                  <p>12 contextual colors per level with variance-based calculation</p>
+                  <p>Nested .up classes for hierarchical brightness</p>
+                  <p>Caption gradients with multiple stops for special effects</p>
+
+                  <p>This creates a mathematically consistent yet visually flexible system. The fact that it generates clean, modern CSS with CSS custom properties makes it both performant and maintainable. The Bootstrap compatibility at level5 is a smart touch for migration paths.</p>
+                </div>
+              </div>
+            </section>
+          </tab-panel>
+
+
+        </main>
+
+        <footer>
+          <!--<button data-offcanvas-toggle data-offcanvas-target="#sidebar" style="background-color: var(--l3-fg); color: orange;">sidebar</button>-->
+          <h4>CSS Code</h4>
+          <div style="">
+            <code id="cssCode" style="white-space: pre"> </code>
+          </div>
+        </footer>
+      </div>
+
+      <br />
+      <br />&nbsp;
+    </div>
+
+    <offcanvas-panel id="sidebar">
+      <div slot="header" class="header" >
+        <div>Sidebar</div>
+        <button data-dismiss="offcanvas">&times;</button>
+      </div>
+
+      <div slot="footer" class="footer" >
+        <small>A little footnote.</small>
+      </div>
+    </offcanvas-panel>
+  </body>
+</html>

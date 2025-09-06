@@ -1,0 +1,45 @@
+{
+  "name": "blueberries",
+  "description": "Dark, modern, powerful, extensible, and feature-packed website theme.",
+  "version": "1.0.16",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "rebuild-favicon": "./bin/rebuild-favicon.sh images/favicon/icon.jpg",
+    "demo": "http-server -c-1 -o .",
+    "test": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(pathToFileURL(\"./import-map-hooks.js\"));' --test",
+    "modules": "rsync -avL --exclude='.*' --exclude='_unused' ./node_modules/* ./modules/",
+    "save": "npm run modules; git add .; git commit -m 'Updated Release'; npm version patch; npm publish; git push --follow-tags;"
+  },
+  "keywords": [
+    "rev",
+    "fp"
+  ],
+  "author": "@catpea",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/catpea/blueberries.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catpea/blueberries/issues"
+  },
+  "homepage": "https://github.com/catpea/blueberries#readme",
+  "devDependencies": {},
+  "localDependencies": {
+    "../ladybits": "^2.0.0",
+    "../heebiejeebies": "^1.0.5",
+    "../mlue/": "^1.0.7",
+    "../sinusoid/": "^1.0.1",
+    "../epidermis": "^1.0.1",
+    "../iridescence": "^1.0.1"
+  },
+  "dependencies": {
+    "ladybits": "^2.0.3",
+    "heebiejeebies": "^1.0.5",
+    "mlue": "^1.0.7",
+    "sinusoid": "^1.1.1",
+    "epidermis": "^1.0.1",
+    "iridescence": "^1.0.1"
+  }
+}
