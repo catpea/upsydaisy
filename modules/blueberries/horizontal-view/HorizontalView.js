@@ -43,7 +43,6 @@ template.innerHTML = `
       max-width: 100%;
       container-type: inline-size; /* Enable container queries */
       background: var(--up1-backdrop);
-
     }
 
     .scroll-viewport {

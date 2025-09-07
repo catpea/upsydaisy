@@ -1,3 +1,5 @@
+import { ContextRequestEvent } from "../util/ContextRequestEvent.js";
+
 // we must use the template element as it only requires: shadow.appendChild(template.content.cloneNode(true));
 const template = document.createElement('template');
 template.innerHTML = `
@@ -209,6 +211,35 @@ export class LevelBuilder extends HTMLElement {
     this.setupEventListeners();
   }
 
+
+  static get observedAttributes() {
+    return ["gradient-stops"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "gradient-stops" && newValue) {
+      try {
+        console.log(newValue);
+        this.#colorStops = JSON.parse(newValue);
+        this.initializeComponents();
+      } catch (e) {
+        console.error("Invalid gradient-stops JSON:", e);
+      }
+    }
+  }
+
+  connectedCallback() {
+    this.dispatchEvent( new ContextRequestEvent(application => this.contextCallback(application)));
+  }
+
+  contextCallback(application){
+
+    this.application = application;
+    lo(this.constructor.name, 'Connected to Application', this.application);
+
+
+  }
+
   initializeComponents() {
     const stopsJson = JSON.stringify(this.#colorStops);
     this.gradientBarComponent.setAttribute('gradient-stops', stopsJson);
@@ -297,6 +328,8 @@ export class LevelBuilder extends HTMLElement {
     // Update info text
     this.stopInfoContainer.classList.remove('no-selection');
     this.stopInfoText.textContent = `Selected stop #${index + 1} at ${stop.percentage.toFixed(1)}%`;
+
+    this.application.userActivity.value = { id:'color-stop', detail:stop };
 
     // Highlight the selected stop visually
     this.highlightSelectedStop(index);
@@ -465,22 +498,6 @@ export class LevelBuilder extends HTMLElement {
   }
 
 
-
-  static get observedAttributes() {
-    return ["gradient-stops"];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "gradient-stops" && newValue) {
-      try {
-        console.log(newValue);
-        this.#colorStops = JSON.parse(newValue);
-        this.initializeComponents();
-      } catch (e) {
-        console.error("Invalid gradient-stops JSON:", e);
-      }
-    }
-  }
 
 
     // this.initializeComponents();

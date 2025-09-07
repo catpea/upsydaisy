@@ -695,6 +695,6 @@ label {
 
 
 .container {
-  width: min(100%, 992px);
+  width: min(100%, 90vw);
   margin: 0 auto; /* Center the container */
 }

@@ -2,7 +2,9 @@
 <html lang="en" color-mode="dark">
   <head>
     <style id="cssPreview"></style>
-
+    <script>
+    globalThis.lo = (...a) => console.log('🌼', ...a);
+    </script>
     <style>
       --debug-show-component-names: inline;
     </style>
@@ -24,6 +26,29 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.4/beautify-css.js"></script>
 
+
+        <script type="importmap">
+      {
+        "imports": {
+
+
+          "#web-application": "./modules/blueberries/web-application/WebApplication.js",
+          "#application-messages": "./modules/blueberries/application-messages/ApplicationMessages.js",
+
+          "#gradient-bar": "./modules/blueberries/gradient-bar/GradientBar.js",
+          "#gradient-stops": "./modules/blueberries/gradient-stops/GradientStops.js",
+          "#level-builder": "./modules/blueberries/level-builder/LevelBuilder.js",
+
+          "#switch-panel": "./modules/blueberries/switch-panel/SwitchPanel.js",
+
+
+          "#sinusoid": "./modules/sinusoid/index.js",
+          "#ladybits": "./modules/ladybits/index.js"
+
+        }
+      }
+    </script>
+    <!--
     <script type="importmap">
       {
         "imports": {
@@ -50,9 +75,36 @@
           "#ladybits": "./modules/ladybits/index.js"
         }
       }
-    </script>
+    </script>-->
 
     <script type="module">
+
+      import { WebApplication } from "#web-application";
+      customElements.define("web-application", WebApplication);
+
+      import { ApplicationMessages } from "#application-messages";
+      customElements.define("application-messages", ApplicationMessages);
+
+      ///
+
+      import { GradientBar } from "#gradient-bar";
+      customElements.define("gradient-bar", GradientBar);
+
+      import { GradientStops } from "#gradient-stops";
+      customElements.define("gradient-stops", GradientStops);
+
+      import { LevelBuilder } from "#level-builder";
+      customElements.define("level-builder", LevelBuilder);
+
+      ///
+
+      import { SwitchPanel } from "#switch-panel";
+      customElements.define("switch-panel", SwitchPanel);
+
+
+    </script>
+
+    <!--<script type="module">
       import { LinkStyle } from "#link-style";
       import { OffcanvasPanel } from "#offcanvas-panel";
       import { SwitchPanel } from "#switch-panel";
@@ -84,15 +136,17 @@
       customElements.define("level-builder", LevelBuilder);
 
       customElements.define("theme-customizer", ThemeCustomizer);
-    </script>
+    </script>-->
+
   </head>
+
   <body style="padding-top: 4rem;">
 
     <div class="container">
 
-    <link href="application.css" rel="stylesheet" />
 
     <web-application class="sidebar-application theme1">
+
       <header class="text-sm">Upsy Daisy &middot; Gradient Smart Theme Builder</header>
 
       <figure>
@@ -103,22 +157,38 @@
       <!--<search-form placeholder="Search…">searchform</search-form>-->
 
       <!-- Profile / user info -->
-      <!--<user-info fullname="Jane Doe" username="jdoe" avatar="jdoe.png">user info</user-info>-->
+      <user-info fullname="Jane Doe" username="jdoe" avatar="jdoe.png"></user-info>
 
       <!-- Main navigation menu -->
       <nav>
 
-        Gradient Selector!
+        <level-builder id="levelBuilder"></level-builder>
 
       </nav>
 
       <!-- Alerts / notifications -->
-      <alert-region> <small>web-application is the root context</small> </alert-region>
+      <alert-region>
+        <application-messages></application-messages>
+      </alert-region>
 
       <!-- Properties / inspector panel -->
       <aside>
         <h6>Context Sensitive Properties</h6>
-        <!-- content -->
+        <switch-panel id="userActivity" data-selected="second">
+
+          <section data-id="idle" style="display: none;">
+            idle view content
+          </section>
+
+          <section data-id="color-stop" style="display: none;">
+            color stop selected
+          </section>
+
+          <section data-id="second" style="display: none;">
+            second view content
+          </section>
+
+        </switch-panel>
       </aside>
 
       <!-- Main workspace -->
@@ -132,6 +202,43 @@
       </footer>
 
     </web-application>
+
+
+    <script type="module">
+
+      import { Signal, DisposableSinusoidalListener } from "#sinusoid";
+
+      const application = document.querySelector('web-application');
+
+      application.colorStops = new Signal([
+        { percentage: 0, color: "#03141C" },
+        { percentage: 55, color: "#3B9C93" },
+        { percentage: 100, color: "#083145" },
+      ]);
+
+      const levelBuilder = document.querySelector('#levelBuilder');
+      application.colorStops.subscribe( v=>levelBuilder.setAttribute("gradient-stops", JSON.stringify(v)) );
+
+      // levelBuilder.addEventListener("gradient-changed", (e) => {
+        // this.#colorStops = e.detail.stops;
+        // const stopsJson = JSON.stringify(this.#colorStops);
+        // this.themeGrid.setAttribute("gradient-stops", stopsJson);
+      // });
+
+      ///
+
+      const userActivity = document.querySelector('#userActivity');
+      application.userActivity = new Signal( {id:'idle'} );
+
+      // Activate The Correct View
+      application.userActivity.subscribe( v=>userActivity.setAttribute('view', v.id));
+
+
+      // Use The Data from the userActivity Signal to seed something...
+      application.userActivity.subscribe( v=> document.querySelector('section[data-id=color-stop]').textContent = JSON.stringify(v, null, 2) );
+
+
+    </script>
 
   </div>
 </html>

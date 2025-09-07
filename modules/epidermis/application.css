@@ -38,6 +38,7 @@ web-application.sidebar-application {
     "foot    foot    alert";
   grid-template-rows: auto;
   grid-template-columns: 12rem 1fr 14rem;
+  gap: 1rem;
 
   > header {
     grid-area: caption;
@@ -97,7 +98,11 @@ web-application.sidebar-application.theme1 {
   }
 
   > user-info {
+
+    background: var(--up2-caption);
+    border-radius: var(--border-radius);
     padding: var(--padding);
+
   }
 
   > nav {

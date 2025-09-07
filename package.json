@@ -26,10 +26,12 @@
   "homepage": "https://github.com/catpea/upsydaisy#readme",
   "dependencies": {
     "epidermis": "^1.0.1",
-    "blueberries": "^1.0.16"
+    "blueberries": "^1.0.16",
+    "sinusoid": "^1.1.1"
   },
   "localDependencies": {
     "../epidermis": "^1.0.1",
-    "../blueberries": "^1.0.16"
+    "../blueberries": "^1.0.16",
+    "../sinusoid": "^1.1.1"
   }
 }
