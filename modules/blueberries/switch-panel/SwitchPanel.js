@@ -2,7 +2,6 @@ import { Signal, DisposableSinusoidalListener } from "#sinusoid";
 import { Disposables } from "../util/Disposables.js";
 import { DisposableEventListener } from "../util/DisposableEventListener.js";
 
-
 /**
  * Simple and minimal, lightweight implementation of a switch-panel web component (aka card-stack/view-stack)
  *
@@ -23,18 +22,22 @@ template.innerHTML = `
     :host {
       display: block;
     }
+
   </style>
+
   <slot></slot>
 `;
 
 export class SwitchPanel extends HTMLElement {
   #disposables = new Disposables(); // set by external web-component
+  #view;
 
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: "open" });
     shadow.appendChild(template.content.cloneNode(true));
-    this.#disposables.add(new DisposableEventListener(this, "selectchange", ({detail:{select}})=>this.selectView(select)));
+    this.#disposables.add(new DisposableEventListener(this, "view-change", ({detail:{view}})=>this.selectView(view)));
+
   }
 
   connectedCallback() {
@@ -46,24 +49,34 @@ export class SwitchPanel extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["select"];
+    return ["view"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "select" && newValue) {
-      try {
-        this.dispatchEvent(new CustomEvent('selectchange', {
-          detail: { select: newValue },
+    if (name === "view" && newValue) {
+        this.dispatchEvent(new CustomEvent('view-change', {
+          detail: { view: newValue },
           bubbles: true
         }));
-      } catch (e) {
-        console.error("Invalid gradient-stops JSON:", e);
-      }
     }
   }
 
-  selectView(select){
-    console.log('@@@ select', selectView)
+  selectView(view){
+
+    const slot = this.shadowRoot.querySelector('slot');
+    const assignedNodes = slot.assignedNodes({ flatten: true });
+
+    slot.style.display = 'block';
+
+    assignedNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if(node.dataset.id == view){
+          node.style.display = 'block';
+        }else{
+          node.style.display = 'none';
+        }
+      }
+    });
   }
 
 
